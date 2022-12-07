@@ -52,10 +52,10 @@ public class Target : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
-        // if an object that is not tagged bad falls below sensor, game over
-        if(!gameObject.CompareTag("Bad"))
+        // if an object that is not tagged bad falls below sensor and game is still active, lose a life
+        if(!gameObject.CompareTag("Bad") && gameManager.isGameActive)
         {
-            gameManager.GameOver();
+            gameManager.UpdateLives(-1);
         }
     }
 

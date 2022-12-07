@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText; //score text assigned to text mesh pro
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI livesText;
     public Button restartButton;
     public GameObject titleScreen;
     public bool isGameActive;
 
     //private variables
     private int score;
+    private int lives;
     private float spawnRate = 1.0f;
 
     // Start is called before the first frame update
@@ -50,6 +52,16 @@ public class GameManager : MonoBehaviour
         score += scoreToAdd; //score increases everytime UpdateScore argument is run
         scoreText.text = "Score: " + score; //will update text ingame as score variable changes
     }
+
+    public void UpdateLives(int livesToChange) 
+    {
+        lives += livesToChange;
+        livesText.text = "Lives: " + lives;
+        if (lives <= 0)
+        {
+            GameOver();
+        }
+    }
     
     public void GameOver()
     {
@@ -70,6 +82,7 @@ public class GameManager : MonoBehaviour
         spawnRate /= difficulty; //spawn rate divided by chosen difficulty value, spawning object faster
         StartCoroutine(SpawnTarget());
         UpdateScore(0);
+        UpdateLives(3);
         titleScreen.gameObject.SetActive(false); //turns off title screen when game starts
     }
 }
