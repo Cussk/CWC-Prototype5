@@ -37,16 +37,16 @@ public class Target : MonoBehaviour
     }
 
     //destroy object on mouse click
-    private void OnMouseDown()
-    {
-        if (gameManager.isGameActive)
-        {
-            Destroy(gameObject);
-            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation); //spawns particle on objects position
-            gameManager.UpdateScore(pointValue); //calls update score method passing the pointValue variables assigned to game objects
-        }
+    //private void OnMouseDown()
+    //{
+        //if (gameManager.isGameActive)
+       // {
+          //  Destroy(gameObject);
+            //Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation); //spawns particle on objects position
+            //gameManager.UpdateScore(pointValue); //calls update score method passing the pointValue variables assigned to game objects
+        //}
         
-    }
+    //}
 
     //when objects drop below sensor bar destroy object
     private void OnTriggerEnter(Collider other)
@@ -57,6 +57,14 @@ public class Target : MonoBehaviour
         {
             gameManager.UpdateLives(-1);
         }
+    }
+
+    public void DestroyTarget()
+    {
+        Destroy(gameObject);
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation); //spawns particle on objects position
+        gameManager.UpdateScore(pointValue); //calls update score method passing the pointValue variables assigned to game objects
+
     }
 
     Vector3 RandomForce()
