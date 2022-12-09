@@ -61,10 +61,12 @@ public class Target : MonoBehaviour
 
     public void DestroyTarget()
     {
-        Destroy(gameObject);
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation); //spawns particle on objects position
-        gameManager.UpdateScore(pointValue); //calls update score method passing the pointValue variables assigned to game objects
-
+        if (gameManager.isGameActive)
+        {
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation); //spawns particle on objects position
+            gameManager.UpdateScore(pointValue); //calls update score method passing the pointValue variables assigned to game objects
+        }
     }
 
     Vector3 RandomForce()
